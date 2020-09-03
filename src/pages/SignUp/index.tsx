@@ -17,7 +17,7 @@ import { Container, Content, Background } from './styles';
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: any) => {
+  const handleSubmit = useCallback(async (data: Record<string, unknown>) => {
     try {
       formRef.current?.setErrors({});
 
@@ -31,7 +31,6 @@ const SignUp: React.FC = () => {
         abortEarly: false,
       });
     } catch (error) {
-      console.log(error);
       const errors = getValidationErrors(error);
 
       formRef.current?.setErrors(errors);
