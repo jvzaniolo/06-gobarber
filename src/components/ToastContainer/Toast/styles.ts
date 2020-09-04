@@ -1,5 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { animated } from 'react-spring';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ContainerProps {
   type?: 'success' | 'error';
 }
@@ -19,7 +21,7 @@ const toastTypeVariations = {
   `,
 };
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled(animated.div) <ContainerProps>`
   width: 360px;
   position: relative;
   padding: 16px 30px 16px 16px;
