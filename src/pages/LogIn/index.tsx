@@ -5,6 +5,8 @@ import { FormHandles } from '@unform/core';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/Auth';
+import { useToast } from '../../hooks/Toast';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo.svg';
@@ -23,6 +25,7 @@ const LogIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { logIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(async (data: LogInFormData) => {
     try {
@@ -37,7 +40,7 @@ const LogIn: React.FC = () => {
         abortEarly: false,
       });
 
-      logIn({
+      await logIn({
         email: data.email,
         password: data.password,
       });
@@ -46,9 +49,16 @@ const LogIn: React.FC = () => {
         const errors = getValidationErrors(error);
 
         formRef.current?.setErrors(errors);
+        return;
       }
+
+      addToast({
+        type: 'error',
+        title: 'Erro na autenticação',
+        description: 'Confira suas credenciais',
+      });
     }
-  }, [logIn]);
+  }, [logIn, addToast]);
 
   return (
     <Container>
