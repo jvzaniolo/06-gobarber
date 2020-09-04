@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
