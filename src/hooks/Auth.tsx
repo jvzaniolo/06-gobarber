@@ -4,9 +4,15 @@ import React, {
 
 import api from '../services/api';
 
+interface User {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
 interface AuthState {
   token: string;
-  user: Record<string, unknown>;
+  user: User;
 }
 
 interface LogInCredentials {
@@ -15,7 +21,7 @@ interface LogInCredentials {
 }
 
 interface AuthContextData {
-  user: Record<string, unknown>;
+  user: User;
   logIn(credentials: LogInCredentials): Promise<void>;
   logOut(): void;
 }
