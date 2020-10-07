@@ -14,9 +14,7 @@ import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import {
-  Container, Content, AnimationContainer, Background,
-} from './styles';
+import { Container, Content, AnimationContainer, Background } from './styles';
 import api from '../../services/api';
 
 interface ResetPasswordFormData {
@@ -32,50 +30,54 @@ const ResetPassword: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const handleSubmit = useCallback(async (data: ResetPasswordFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: ResetPasswordFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        password: Yup.string().required('Senha é obrigatória'),
-        password_confirmation: Yup.string().oneOf(
-          [Yup.ref('password'), undefined], 'As senhas não coincidem',
-        ),
-      });
+        const schema = Yup.object().shape({
+          password: Yup.string().required('Senha é obrigatória'),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password'), undefined],
+            'As senhas não coincidem',
+          ),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      const { password, password_confirmation } = data;
-      const token = location.search.replace('?token=', '');
+        const { password, password_confirmation } = data;
+        const token = location.search.replace('?token=', '');
 
-      if (!token) {
-        throw new Error();
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
+
+        history.push('/');
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro ao resetar senha',
+          description: 'Ocorreu um erro ao resetar sua senha, tente novamente',
+        });
       }
-
-      await api.post('/password/reset', {
-        password,
-        password_confirmation,
-        token,
-      });
-
-      history.push('/');
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
-
-        formRef.current?.setErrors(errors);
-        return;
-      }
-
-      addToast({
-        type: 'error',
-        title: 'Erro ao resetar senha',
-        description: 'Ocorreu um erro ao resetar sua senha, tente novamente',
-      });
-    }
-  }, [addToast, history, location]);
+    },
+    [addToast, history, location],
+  );
 
   return (
     <Container>
@@ -86,8 +88,18 @@ const ResetPassword: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Resetar senha</h1>
 
-            <Input name="password" icon={FiLock} type="password" placeholder="Nova senha" />
-            <Input name="password_confirmation" icon={FiLock} type="password" placeholder="Confirmar senha" />
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              placeholder="Nova senha"
+            />
+            <Input
+              name="password_confirmation"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirmar senha"
+            />
 
             <Button type="submit">Alterar senha</Button>
           </Form>

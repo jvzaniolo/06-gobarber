@@ -1,5 +1,9 @@
 import React, {
-  InputHTMLAttributes, useEffect, useRef, useState, useCallback,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
@@ -16,9 +20,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [hasContent, setHasContent] = useState(false);
-  const {
-    fieldName, defaultValue, registerField, error,
-  } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   // functions
   const handleInputFocus = useCallback(() => {
@@ -50,7 +52,11 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         {...rest}
       />
 
-      {error && <Error title={error}><FiAlertCircle color="#C53030" size={20} /></Error>}
+      {error && (
+        <Error title={error}>
+          <FiAlertCircle color="#C53030" size={20} />
+        </Error>
+      )}
     </Container>
   );
 };
