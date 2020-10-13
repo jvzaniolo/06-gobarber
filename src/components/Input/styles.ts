@@ -22,23 +22,29 @@ export const Container = styled.div<ContainerProps>`
     margin-top: 8px;
   }
 
-  ${(props) => props.hasError && css`
-    border-color: #C53030;
-  `}
+  ${props =>
+    props.hasError &&
+    css`
+      border-color: #c53030;
+    `}
 
-  ${(props) => props.isFocused && css`
-    color: #FF9000;
-    border-color: #FF9000;
-  `}
+  ${props =>
+    props.isFocused &&
+    css`
+      color: #ff9000;
+      border-color: #ff9000;
+    `}
 
-  ${(props) => props.hasContent && css`
-    color: #FF9000;
-  `}
+  ${props =>
+    props.hasContent &&
+    css`
+      color: #ff9000;
+    `}
 
   input {
     flex: 1;
     border: 0;
-    color: #F4EDE8;
+    color: #f4ede8;
     padding: 16px 0;
     background: transparent;
 
@@ -61,7 +67,7 @@ export const Error = styled(Tooltip)`
   }
 
   span {
-    background: #C53030;
+    background: #c53030;
     color: #fff;
 
     &::before {

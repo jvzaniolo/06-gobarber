@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import {
   Route as ReactDOMRoute,
@@ -32,8 +34,7 @@ const Route: React.FC<RouteProps> = ({
                 state: { from: location },
               }}
             />
-          )
-      }
+          )}
     />
   );
 };
