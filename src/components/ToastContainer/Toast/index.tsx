@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FiInfo, FiCheckCircle, FiXCircle, FiTrash2 } from 'react-icons/fi';
 
-import { ToastMessage, useToast } from '../../../hooks/Toast';
+import { ToastMessage, useToast } from '../../../hooks/toast';
 
 import { Container } from './styles';
 

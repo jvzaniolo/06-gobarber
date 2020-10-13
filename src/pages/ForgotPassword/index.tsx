@@ -5,7 +5,7 @@ import { FormHandles } from '@unform/core';
 import { FiLogIn, FiMail } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import { useToast } from '../../hooks/Toast';
+import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 

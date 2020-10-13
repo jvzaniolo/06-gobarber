@@ -30,6 +30,10 @@ export const HeaderContent = styled.div`
       width: 20px;
     }
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Profile = styled.div`

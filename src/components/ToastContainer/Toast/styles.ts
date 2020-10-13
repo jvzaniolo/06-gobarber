@@ -20,7 +20,6 @@ const toastTypeVariations = {
   `,
 };
 
-// eslint-disable-next-line prettier/prettier
 export const Container = styled(animated.div) <ContainerProps>`
   width: 360px;
   position: relative;
