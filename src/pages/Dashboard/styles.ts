@@ -41,12 +41,6 @@ export const Profile = styled.div`
   align-items: center;
   margin-left: 80px;
 
-  img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-  }
-
   div {
     display: flex;
     flex-direction: column;
@@ -60,6 +54,20 @@ export const Profile = styled.div`
     strong {
       color: #ff9000;
     }
+  }
+`;
+
+export const ImageProfile = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  img {
+    /* display: block; */
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: contain;
   }
 `;
 

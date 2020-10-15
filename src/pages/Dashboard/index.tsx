@@ -15,6 +15,7 @@ import {
   Header,
   HeaderContent,
   Profile,
+  ImageProfile,
   Main,
   Schedule,
   NextAppointment,
@@ -152,7 +153,9 @@ const Dashboard: React.FC = () => {
 
           <Link to="/profile">
             <Profile>
-              <img src={user.avatar_url} alt={user.name} />
+              <ImageProfile>
+                <img src={user.avatar_url} alt={user.name} />
+              </ImageProfile>
 
               <div>
                 <span>Bem-vindo,</span>
